@@ -1,2 +1,4 @@
 package: github.com/staticmukesh/aerospike-exporter
-import: []
+import:
+- package: github.com/aerospike/aerospike-client-go
+- package: github.com/prometheus/client_golang/prometheus

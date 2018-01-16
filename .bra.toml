@@ -1,7 +1,7 @@
 [run]
 init_cmds = [
 	["go", "install"],
-	["go", "build", "-o", "./bin/aerospike_exporter", "main.go"],
+	["go", "build", "-o", "./bin/aerospike_exporter", "."],
 	["./bin/aerospike_exporter"]
 ]									# Commands run in start
 watch_all = true					# Watch all sub-directories
@@ -21,7 +21,7 @@ interrupt_timout = 15				# Time to wait until force kill
 graceful_kill = false				# Wait for exit and before directly kill
 cmds = [
 	["go", "install"],
-	["go", "build", "-o", "./bin/aerospike_exporter", "main.go"],
+	["go", "build", "-o", "./bin/aerospike_exporter", "."],
 	["./bin/aerospike_exporter"]
 ]									# Commands to run
 
