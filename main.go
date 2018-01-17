@@ -2,12 +2,11 @@ package main
 
 import (
 	"flag"
-	"fmt"
 	"log"
 	"net/http"
-	"os"
 
 	"github.com/prometheus/client_golang/prometheus"
+	"github.com/staticmukesh/aerospike_exporter/exporter"
 )
 
 var (
@@ -23,11 +22,9 @@ var (
 func main() {
 	flag.Parse()
 
-	exporter, err := NewAerospikeExporter(*asAddr)
-	if err != nil {
-		fmt.Println(err)
-		os.Exit(1)
-	}
+	exporter := exporter.New(exporter.Options{
+		Addr: "localhost:3000",
+	})
 
 	prometheus.Register(exporter)
 
