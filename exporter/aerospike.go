@@ -20,6 +20,7 @@ func New(options Options) *AerospikeExporter {
 		Namespace: options.Namespace,
 		Exporters: []Exporter{
 			NewBasicExporter(options),
+			NewStatsExporter(options),
 		},
 	}
 }

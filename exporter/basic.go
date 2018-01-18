@@ -64,10 +64,8 @@ type BasicExporter struct {
 
 // Process accepts scrapes and processes it
 func (e *BasicExporter) Process(scraps <-chan Scrap) {
-	fmt.Println("Processing scraps....")
 	for scrap := range scraps {
 		for k, v := range scrap {
-			fmt.Println(k, v)
 			if info, ok := basicMetricInfo[k]; ok {
 				switch info.valType {
 				case String:
@@ -94,14 +92,12 @@ func (e *BasicExporter) Process(scraps <-chan Scrap) {
 			}
 		}
 	}
-	fmt.Println("Processed scraps.")
 }
 
 // Extract accepts generates scrapes
 func (e *BasicExporter) Extract(scraps chan<- Scrap) {
 	defer close(scraps)
 
-	fmt.Println("Extracting scraps....")
 	conn, err := as.NewConnection(e.Addr, time.Minute)
 	if err != nil {
 		fmt.Println(err)
@@ -117,7 +113,6 @@ func (e *BasicExporter) Extract(scraps chan<- Scrap) {
 	}
 
 	scraps <- info
-	fmt.Println("Extracted scraps.")
 }
 
 // Collect collects prometheus's Collector interface
