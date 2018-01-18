@@ -12,8 +12,9 @@ type Exporter interface {
 
 // Options stores exporter related meta
 type Options struct {
-	Alias string
-	Addr  string
+	Alias     string
+	Addr      string
+	Namespace string
 }
 
 // Scrap represent map of key-value pair from aeropsike info
@@ -33,8 +34,9 @@ const (
 
 // MetricInfo stores information about metric
 type MetricInfo struct {
-	valType ValueType
-	name    string
-	help    string
-	labels  []string
+	valType   ValueType
+	name      string
+	help      string
+	namespace string
+	labels    []string
 }

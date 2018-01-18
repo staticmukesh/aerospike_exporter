@@ -7,17 +7,17 @@ import (
 // AerospikeExporter implements prometheus collectors
 type AerospikeExporter struct {
 	Adrr      string
+	Alias     string
+	Namespace string
 	Exporters []Exporter
 }
 
 // New initializes AerospikeExporter and returns it
 func New(options Options) *AerospikeExporter {
-	if len(options.Addr) == 0 {
-		options.Addr = "localhost:3000"
-	}
-
 	return &AerospikeExporter{
-		Adrr: options.Addr,
+		Adrr:      options.Addr,
+		Alias:     options.Alias,
+		Namespace: options.Namespace,
 		Exporters: []Exporter{
 			NewBasicExporter(options),
 		},

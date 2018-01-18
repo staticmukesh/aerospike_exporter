@@ -13,9 +13,33 @@ var (
 	basicMetricInfo = map[string]MetricInfo{
 		"node": MetricInfo{
 			valType: String,
-			name:    "aerospike_node_name",
+			name:    "node_name",
 			help:    "Name of Aerospike node",
 			labels:  []string{"addr", "alias", "id"},
+		},
+		"edition": MetricInfo{
+			valType: String,
+			name:    "edtion",
+			help:    "Edition of Aerospike node",
+			labels:  []string{"addr", "alias", "edition"},
+		},
+		"build": MetricInfo{
+			valType: String,
+			name:    "build",
+			help:    "Build of Aerospike node",
+			labels:  []string{"addr", "alias", "build"},
+		},
+		"partition-generation": MetricInfo{
+			valType: Float,
+			name:    "partition_generation",
+			help:    "Partition generation of Aerospike node",
+			labels:  []string{"addr", "alias"},
+		},
+		"cluster-generation": MetricInfo{
+			valType: Float,
+			name:    "cluster_generation",
+			help:    "Cluster generation of Aerospike node",
+			labels:  []string{"addr", "alias"},
 		},
 	}
 )
@@ -23,25 +47,27 @@ var (
 // NewBasicExporter initializes BasicExporter
 func NewBasicExporter(options Options) Exporter {
 	return &BasicExporter{
-		Addr:    options.Addr,
-		Alias:   options.Alias,
-		Metrics: initBasicMetrics(),
+		Addr:      options.Addr,
+		Alias:     options.Alias,
+		Namespace: options.Namespace,
+		Metrics:   initBasicMetrics(options.Namespace),
 	}
 }
 
 // BasicExporter provides
 type BasicExporter struct {
-	Addr    string
-	Alias   string
-	Metrics map[string]*prometheus.GaugeVec
+	Addr      string
+	Alias     string
+	Namespace string
+	Metrics   map[string]*prometheus.GaugeVec
 }
 
 // Process accepts scrapes and processes it
 func (e *BasicExporter) Process(scraps <-chan Scrap) {
 	fmt.Println("Processing scraps....")
 	for scrap := range scraps {
-		fmt.Println("Scrap received:", scrap)
 		for k, v := range scrap {
+			fmt.Println(k, v)
 			if info, ok := basicMetricInfo[k]; ok {
 				switch info.valType {
 				case String:
@@ -113,13 +139,14 @@ func (e *BasicExporter) Describe(ch chan<- *prometheus.Desc) {
 	}
 }
 
-func initBasicMetrics() map[string]*prometheus.GaugeVec {
+func initBasicMetrics(namespace string) map[string]*prometheus.GaugeVec {
 	metrics := map[string]*prometheus.GaugeVec{}
 
 	for k, v := range basicMetricInfo {
 		metrics[k] = prometheus.NewGaugeVec(prometheus.GaugeOpts{
-			Name: v.name,
-			Help: v.help,
+			Name:      v.name,
+			Help:      v.help,
+			Namespace: namespace,
 		}, v.labels)
 	}
 
