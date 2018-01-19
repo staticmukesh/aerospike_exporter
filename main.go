@@ -12,7 +12,7 @@ import (
 var (
 	asAddr     = flag.String("aerospike.addr", GetEnv("AEROSPIKE_ADDR", "localhost:3000"), "Address of aerospike node")
 	asAlias    = flag.String("aerospike.alias", GetEnv("AEROSPIKE_ALIAS", ""), "Alias of aerospike node")
-	listenAddr = flag.String("web.listen-address", GetEnv("LISTEN_ADDR", ":9090"), "Address to listen on for web interface and telemetry.")
+	listenAddr = flag.String("web.listen-address", "0.0.0.0:9090", "Address to listen on for web interface and telemetry.")
 	metricPath = flag.String("web.telemetry-path", "/metrics", "Path under which to expose metrics.")
 
 	version = "<<< filled in by build >>>"
