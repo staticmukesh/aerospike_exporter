@@ -1,4 +1,5 @@
 # Aerospike Metrics Exporter
+[![Circle CI](https://circleci.com/gh/staticmukesh/aerospike_exporter.svg?style=shield)](https://circleci.com/gh/staticmukesh/aerospike_exporter)
 
 A Prometheus exporter for collecting Aerospike metrics.
 
