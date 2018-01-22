@@ -1,0 +1,12 @@
+machine:
+  environment:
+    GO_LDFLAGS: '-X main.VERSION=$CIRCLE_TAG -X main.COMMIT_SHA1=$CIRCLE_SHA1 -X main.BUILD_DATE=$(date +%F-%T)'
+    GO_VERSION: "1.9.2"
+
+deployment:
+  publish:
+    tag: /v.*/
+    commands:
+      - go get github.com/mitchellh/gox
+      - go get github.com/tcnksm/ghr
+      - ./build.sh
