@@ -3,16 +3,12 @@
 
 A Prometheus exporter for collecting Aerospike metrics.
 
-## Building, configuring, and running
+## Installation
 
-Locally build and run it:
+Download latest executable from [releases](https://github.com/staticmukesh/aerospike_exporter/releases), and extract and run it.
 
 ```
-    $ git clone https://github.com/staticmukesh/aerospike_exporter.git
-    $ cd aerospike_exporter
-    $ glide install
-    $ go build
-    $ ./aerospike_exporter <flags>
+$ ./aerospike_exporter <flags>
 ```
 
 Add a block to the `scrape_configs` of your prometheus.yml config file:
@@ -21,11 +17,9 @@ Add a block to the `scrape_configs` of your prometheus.yml config file:
 scrape_configs:
 
 ...
-
-- job_name: aerospike_exporter
-  static_configs:
-  - targets: ['localhost:9145']
-
+  - job_name: aerospike_exporter
+    static_configs:
+      - targets: ['localhost:9145']
 ...
 ```
 and adjust the host name accordingly.
@@ -56,6 +50,22 @@ The exporter collects metrics related to following items from `Aerospike`'s [Inf
 - [x] Statistics
 - [ ] Latency
 - [ ] Namespace
+
+### Local building and running
+
+If you want to build package yourself, or want to contribute. You can follow the guide to setup the project.
+
+```
+$ go get github.com/staticmukesh/aerospike_exporter
+$ go build
+$ ./aerospike_exporter <flags>
+```
+
+To rebuild the package on source change, 
+```
+$ go get github.com/Unknwon/bra
+$ bra run
+```
 
 ### Contributing
 
