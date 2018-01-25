@@ -1,7 +1,8 @@
 package collector
 
 import (
-	"fmt"
+	"log"
+	"os"
 	"strconv"
 	"strings"
 	"sync"
@@ -12,6 +13,14 @@ import (
 	"github.com/prometheus/client_golang/prometheus"
 )
 
+var (
+	logger *log.Logger
+)
+
+func init() {
+	logger = log.New(os.Stdout, "[aerospike_exporter] ", log.LstdFlags)
+}
+
 // Collector abstracts prometheus collector
 type Collector interface {
 	prometheus.Collector
@@ -19,16 +28,10 @@ type Collector interface {
 
 // NewCollector initializes collector
 func NewCollector(options Options, field string) (Collector, error) {
-	conn, err := aerospike.NewConnection(options.Addr, 10*time.Second)
-	if err != nil {
-		return nil, err
-	}
-
 	meta := GetMetricsInfo(field)
 	metrics := GetMetrics(meta)
 
 	return &collector{
-		conn:    conn,
 		addr:    options.Addr,
 		alias:   options.Alias,
 		field:   field,
@@ -38,7 +41,6 @@ func NewCollector(options Options, field string) (Collector, error) {
 }
 
 type collector struct {
-	conn    *aerospike.Connection
 	addr    string
 	alias   string
 	field   string
@@ -67,7 +69,19 @@ func (c *collector) Describe(ch chan<- *prometheus.Desc) {
 }
 
 func (c *collector) extract() (Scraps, error) {
-	scraps, err := aerospike.RequestInfo(c.conn, c.field)
+	conn, err := aerospike.NewConnection(c.addr, 10*time.Second)
+	if err != nil {
+		logger.Println("Aerospike error:", err)
+		return Scraps{}, err
+	}
+	defer conn.Close()
+
+	scraps, err := aerospike.RequestInfo(conn, c.field)
+	if err != nil {
+		logger.Println("Aerospike error:", err)
+		return Scraps{}, nil
+	}
+
 	if len(c.field) != 0 {
 		if unparsed, ok := scraps[c.field]; ok {
 			scraps = c.parse(unparsed)
@@ -90,14 +104,14 @@ func (c *collector) process(scraps Scraps) {
 			case Float:
 				val, err := strconv.ParseFloat(v, 64)
 				if err != nil {
-					fmt.Println(err)
+					logger.Println(err)
 					continue
 				}
 				c.metrics[k].WithLabelValues(c.addr, c.alias).Set(val)
 			case Bool:
 				val, err := strconv.ParseBool(v)
 				if err != nil {
-					fmt.Println(err)
+					logger.Println(err)
 					continue
 				}
 				if val {

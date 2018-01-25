@@ -1,7 +1,6 @@
 #!/usr/bin/env bash
 
 echo "Building aerospike_exporter binaries"
-echo ""
 echo $GO_LDFLAGS
 
 gox -rebuild --osarch="darwin/amd64"  -ldflags "$GO_LDFLAGS" -output "dist/aerospike_exporter" && cd dist && tar -cvzf aerospike_exporter-$CIRCLE_TAG.darwin-amd64.tar.gz aerospike_exporter && rm aerospike_exporter && cd ..

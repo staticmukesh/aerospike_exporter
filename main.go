@@ -4,6 +4,7 @@ import (
 	"flag"
 	"log"
 	"net/http"
+	"os"
 
 	"github.com/prometheus/client_golang/prometheus"
 	"github.com/staticmukesh/aerospike_exporter/collector"
@@ -15,13 +16,21 @@ var (
 	listenAddr = flag.String("web.listen-address", "0.0.0.0:9145", "Address to listen on for web interface and telemetry.")
 	metricPath = flag.String("web.telemetry-path", "/metrics", "Path under which to expose metrics.")
 
-	version = "<<< filled in by build >>>"
-	build   = "<<< filled in by build >>>"
-	commit  = "<<< filled in by build >>>"
+	version = "<<<auto-filled by ldflags>>>"
+	build   = "<<<auto-filled by ldflags>>>"
+	commit  = "<<<auto-filled by ldflags>>>"
+
+	logger *log.Logger
 )
+
+func init() {
+	logger = log.New(os.Stdout, "[aerospike_exporter] ", log.LstdFlags)
+}
 
 func main() {
 	flag.Parse()
+
+	logger.Println("Initializing Aerospike Exporter", version)
 
 	options := collector.Options{
 		Addr:  *asAddr,
@@ -30,8 +39,11 @@ func main() {
 
 	collector, err := collector.NewAerospike(options)
 	if err != nil {
-		panic(err)
+		logger.Panic(err)
 	}
+
+	logger.Println("Connecting to Aerospike Node:", *asAddr)
+	logger.Println("Using node alias: ", *asAlias)
 
 	prometheus.Register(collector)
 
@@ -40,10 +52,10 @@ func main() {
 		w.Write([]byte(`
 			<html>
 				<head>
-					<title>Aerospike Exporter v` + version + `</title>
+					<title>Aerospike Exporter ` + version + `</title>
 				</head>
 				<body>
-					<h1>Aerospike Exporter v` + version + `</h1>
+					<h1>Aerospike Exporter ` + version + `</h1>
 					<p><a href='` + *metricPath + `'>Metrics</a></p>
 				</body>
 			</html>
@@ -53,6 +65,6 @@ func main() {
 	// GET /metrics
 	http.Handle(*metricPath, prometheus.Handler())
 
-	log.Printf("Providing metrics at %s%s", *listenAddr, *metricPath)
-	log.Fatal(http.ListenAndServe(*listenAddr, nil))
+	logger.Printf("Providing metrics at %s%s", *listenAddr, *metricPath)
+	logger.Fatal(http.ListenAndServe(*listenAddr, nil))
 }
