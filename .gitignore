@@ -15,5 +15,4 @@
 
 bin/
 dist/
-vendor/
 aerospike_exporter
