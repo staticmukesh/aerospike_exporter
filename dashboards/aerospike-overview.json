@@ -115,7 +115,7 @@
           "tableColumn": "",
           "targets": [
             {
-              "expr": "aerospike_uptime{instance=\"$host\"}",
+              "expr": "as_stats_uptime{instance=\"$host\"}",
               "format": "time_series",
               "intervalFactor": 2,
               "refId": "A"
@@ -190,7 +190,7 @@
           "tableColumn": "",
           "targets": [
             {
-              "expr": "aerospike_system_free_mem_pct{instance=\"$host\"}",
+              "expr": "as_stats_system_free_mem_pct{instance=\"$host\"}",
               "format": "time_series",
               "intervalFactor": 2,
               "refId": "A"
@@ -265,7 +265,7 @@
           "tableColumn": "",
           "targets": [
             {
-              "expr": "aerospike_cient_connections{instance=\"$host\"}",
+              "expr": "as_stats_cient_connections{instance=\"$host\"}",
               "format": "time_series",
               "intervalFactor": 2,
               "refId": "A"
@@ -340,7 +340,7 @@
           "tableColumn": "",
           "targets": [
             {
-              "expr": "aerospike_cluster_size{instance=\"$host\"}",
+              "expr": "as_stats_cluster_size{instance=\"$host\"}",
               "format": "time_series",
               "intervalFactor": 2,
               "refId": "A"
@@ -415,7 +415,7 @@
           "tableColumn": "",
           "targets": [
             {
-              "expr": "aerospike_objects{instance=\"$host\"}",
+              "expr": "as_stats_objects{instance=\"$host\"}",
               "format": "time_series",
               "intervalFactor": 2,
               "refId": "A"
@@ -490,7 +490,7 @@
           "tableColumn": "",
           "targets": [
             {
-              "expr": "aerospike_tombstones{instance=\"$host\"}",
+              "expr": "as_stats_tombstones{instance=\"$host\"}",
               "format": "time_series",
               "intervalFactor": 2,
               "refId": "A"
@@ -554,7 +554,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "aerospike_cient_connections{instance='$host'}",
+              "expr": "as_stats_cient_connections{instance='$host'}",
               "format": "time_series",
               "instant": false,
               "intervalFactor": 2,
@@ -562,14 +562,14 @@
               "refId": "A"
             },
             {
-              "expr": "aerospike_fabric_connections{instance='$host'}",
+              "expr": "as_stats_fabric_connections{instance='$host'}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "fabric",
               "refId": "B"
             },
             {
-              "expr": "aerospike_heartbeat_connections{instance='$host'}",
+              "expr": "as_stats_heartbeat_connections{instance='$host'}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "heartbeat",
@@ -644,35 +644,35 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "aerospike_batch_queue{instance='$host'}",
+              "expr": "as_stats_batch_queue{instance='$host'}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "batch",
               "refId": "A"
             },
             {
-              "expr": "aerospike_delete_queue{instance='$host'}",
+              "expr": "as_stats_delete_queue{instance='$host'}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "delete",
               "refId": "B"
             },
             {
-              "expr": "aerospike_tsvc_queue{instance='$host'}",
+              "expr": "as_stats_tsvc_queue{instance='$host'}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "tsvc",
               "refId": "D"
             },
             {
-              "expr": "aerospike_info_queue{instance='$host'}",
+              "expr": "as_stats_info_queue{instance='$host'}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "info",
               "refId": "C"
             },
             {
-              "expr": "aerospike_tree_gc_queue{instance='$host'}",
+              "expr": "as_stats_tree_gc_queue{instance='$host'}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "tree_gc",
@@ -747,14 +747,14 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "aerospike_heartbeat_received_self{instance='$host'}",
+              "expr": "as_stats_heartbeat_received_self{instance='$host'}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "self",
               "refId": "A"
             },
             {
-              "expr": "aerospike_heartbeat_received_foreign{instance='$host'}",
+              "expr": "as_stats_heartbeat_received_foreign{instance='$host'}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "other",
@@ -841,21 +841,21 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "aerospike_heap_active_kbytes{instance='$host'}",
+              "expr": "as_stats_heap_active_kbytes{instance='$host'}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "active",
               "refId": "A"
             },
             {
-              "expr": "aerospike_heap_mapped_kbytes{instance='$host'}",
+              "expr": "as_stats_heap_mapped_kbytes{instance='$host'}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "mapped",
               "refId": "B"
             },
             {
-              "expr": "aerospike_heap_allocated_kbytes{instance='$host'}",
+              "expr": "as_stats_heap_allocated_kbytes{instance='$host'}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "allocated",
@@ -930,7 +930,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "aerospike_heap_efficiency_pct{instance='$host'}",
+              "expr": "as_stats_heap_efficiency_pct{instance='$host'}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "efficiency",
@@ -1005,7 +1005,7 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "aerospike_heap_site_count{instance='$host'}",
+              "expr": "as_stats_heap_site_count{instance='$host'}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "site",
@@ -1092,21 +1092,21 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "aerospike_batch_initiate{instance='$host'}",
+              "expr": "as_stats_batch_initiate{instance='$host'}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "initiated",
               "refId": "A"
             },
             {
-              "expr": "aerospike_batch_error{instance='$host'}",
+              "expr": "as_stats_batch_error{instance='$host'}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "error",
               "refId": "B"
             },
             {
-              "expr": "aerospike_batch_timeout{instance='$host'}",
+              "expr": "as_stats_batch_timeout{instance='$host'}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "timeout",
@@ -1181,28 +1181,28 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "aerospike_batch_index_initiate{instance='$host'}",
+              "expr": "as_stats_batch_index_initiate{instance='$host'}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "initiated",
               "refId": "B"
             },
             {
-              "expr": "aerospike_batch_index_complete{instance='$host'}",
+              "expr": "as_stats_batch_index_complete{instance='$host'}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "completed",
               "refId": "A"
             },
             {
-              "expr": "aerospike_batch_index_error{instance='$host'}",
+              "expr": "as_stats_batch_index_error{instance='$host'}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "error",
               "refId": "C"
             },
             {
-              "expr": "aerospike_batch_index_timeout{instance='$host'}",
+              "expr": "as_stats_batch_index_timeout{instance='$host'}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "timeout",
@@ -1277,28 +1277,28 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "aerospike_batch_index_created_buffers{instance='$host'}",
+              "expr": "as_stats_batch_index_created_buffers{instance='$host'}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "created",
               "refId": "B"
             },
             {
-              "expr": "aerospike_batch_index_destroyed_buffers{instance='$host'}",
+              "expr": "as_stats_batch_index_destroyed_buffers{instance='$host'}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "destroyed",
               "refId": "C"
             },
             {
-              "expr": "aerospike_batch_index_unused_buffers{instance='$host'}",
+              "expr": "as_stats_batch_index_unused_buffers{instance='$host'}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "unused",
               "refId": "A"
             },
             {
-              "expr": "aerospike_batch_index_huge_buffers{instance='$host'}",
+              "expr": "as_stats_batch_index_huge_buffers{instance='$host'}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "huge",
@@ -1385,14 +1385,14 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "aerospike_fabric_ctrl_send_rate{instance='$host'}",
+              "expr": "as_stats_fabric_ctrl_send_rate{instance='$host'}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "send",
               "refId": "B"
             },
             {
-              "expr": "aerospike_fabric_ctrl_recv_rate{instance='$host'}",
+              "expr": "as_stats_fabric_ctrl_recv_rate{instance='$host'}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "recv",
@@ -1467,14 +1467,14 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "aerospike_fabric_bulk_send_rate{instance='$host'}",
+              "expr": "as_stats_fabric_bulk_send_rate{instance='$host'}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "send",
               "refId": "B"
             },
             {
-              "expr": "aerospike_fabric_bulk_recv_rate{instance='$host'}",
+              "expr": "as_stats_fabric_bulk_recv_rate{instance='$host'}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "recv",
@@ -1549,14 +1549,14 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "aerospike_fabric_meta_send_rate{instance='$host'}",
+              "expr": "as_stats_fabric_meta_send_rate{instance='$host'}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "send",
               "refId": "B"
             },
             {
-              "expr": "aerospike_fabric_meta_recv_rate{instance='$host'}",
+              "expr": "as_stats_fabric_meta_recv_rate{instance='$host'}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "recv",
@@ -1631,14 +1631,14 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "aerospike_fabric_rw_send_rate{instance='$host'}",
+              "expr": "as_stats_fabric_rw_send_rate{instance='$host'}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "send",
               "refId": "B"
             },
             {
-              "expr": "aerospike_fabric_rw_recv_rate{instance='$host'}",
+              "expr": "as_stats_fabric_rw_recv_rate{instance='$host'}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "recv",
@@ -1725,21 +1725,21 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "aerospike_sindex_gc_garbage_cleaned{instance='$host'}",
+              "expr": "as_stats_sindex_gc_garbage_cleaned{instance='$host'}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "cleaned",
               "refId": "A"
             },
             {
-              "expr": "aerospike_sindex_gc_garbage_found{instance='$host'}",
+              "expr": "as_stats_sindex_gc_garbage_found{instance='$host'}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "found",
               "refId": "B"
             },
             {
-              "expr": "aerospike_sindex_gc_objects_validated{instance='$host'}",
+              "expr": "as_stats_sindex_gc_objects_validated{instance='$host'}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "validated",
@@ -1814,14 +1814,14 @@
           "steppedLine": false,
           "targets": [
             {
-              "expr": "aerospike_sindex_gc_list_creation_time{instance='$host'}",
+              "expr": "as_stats_sindex_gc_list_creation_time{instance='$host'}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "creation time",
               "refId": "A"
             },
             {
-              "expr": "aerospike_sindex_gc_list_deletion_time{instance='$host'}",
+              "expr": "as_stats_sindex_gc_list_deletion_time{instance='$host'}",
               "format": "time_series",
               "intervalFactor": 2,
               "legendFormat": "deletion time",
@@ -1945,7 +1945,7 @@
         "multi": false,
         "name": "host",
         "options": [],
-        "query": "label_values(aerospike_cient_connections, instance)",
+        "query": "label_values(as_stats_cient_connections, instance)",
         "refresh": 1,
         "regex": "",
         "sort": 1,

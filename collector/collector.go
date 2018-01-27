@@ -1,6 +1,7 @@
 package collector
 
 import (
+	"errors"
 	"log"
 	"os"
 	"strconv"
@@ -9,8 +10,8 @@ import (
 	"time"
 
 	"github.com/aerospike/aerospike-client-go"
-
 	"github.com/prometheus/client_golang/prometheus"
+	"github.com/staticmukesh/aerospike_exporter/metrics"
 )
 
 var (
@@ -21,6 +22,15 @@ func init() {
 	logger = log.New(os.Stdout, "[aerospike_exporter] ", log.LstdFlags)
 }
 
+// Options store Collector initializing parameters
+type Options struct {
+	Addr  string
+	Alias string
+}
+
+// Scraps stores data exported from Aerospike
+type Scraps map[string]string
+
 // Collector abstracts prometheus collector
 type Collector interface {
 	prometheus.Collector
@@ -28,24 +38,49 @@ type Collector interface {
 
 // NewCollector initializes collector
 func NewCollector(options Options, field string) (Collector, error) {
-	meta := GetMetricsInfo(field)
-	metrics := GetMetrics(meta)
+	meta := metrics.GetMetricsInfo(field)
+	metrics := metrics.GetMetrics(meta)
 
-	return &collector{
-		addr:    options.Addr,
-		alias:   options.Alias,
-		field:   field,
-		meta:    meta,
-		metrics: metrics,
-	}, nil
+	switch field {
+	case "":
+		return &collector{
+			addr:    options.Addr,
+			alias:   options.Alias,
+			field:   field,
+			meta:    meta,
+			metrics: metrics,
+		}, nil
+	case "statistics":
+		return &statsCollector{
+			c: collector{
+				addr:    options.Addr,
+				alias:   options.Alias,
+				field:   field,
+				meta:    meta,
+				metrics: metrics,
+			},
+		}, nil
+	case "namespaces":
+		return &namespaceCollector{
+			c: collector{
+				addr:    options.Addr,
+				alias:   options.Alias,
+				field:   field,
+				meta:    meta,
+				metrics: metrics,
+			},
+		}, nil
+	}
+
+	return &collector{}, errors.New("Collector doesn't exist")
 }
 
 type collector struct {
 	addr    string
 	alias   string
 	field   string
-	meta    MetricsInfo
-	metrics Metrics
+	meta    map[string]metrics.Info
+	metrics metrics.Metrics
 	sync.RWMutex
 }
 
@@ -72,14 +107,14 @@ func (c *collector) extract() (Scraps, error) {
 	conn, err := aerospike.NewConnection(c.addr, 10*time.Second)
 	if err != nil {
 		logger.Println("Aerospike error:", err)
-		return Scraps{}, err
+		return nil, err
 	}
 	defer conn.Close()
 
 	scraps, err := aerospike.RequestInfo(conn, c.field)
 	if err != nil {
 		logger.Println("Aerospike error:", err)
-		return Scraps{}, nil
+		return nil, err
 	}
 
 	if len(c.field) != 0 {
@@ -89,7 +124,7 @@ func (c *collector) extract() (Scraps, error) {
 		}
 	}
 
-	return scraps, err
+	return scraps, nil
 }
 
 func (c *collector) process(scraps Scraps) {
@@ -98,17 +133,17 @@ func (c *collector) process(scraps Scraps) {
 
 	for k, v := range scraps {
 		if info, ok := c.meta[k]; ok {
-			switch info.MetricType {
-			case String:
+			switch info.Type {
+			case metrics.String:
 				c.metrics[k].WithLabelValues(c.addr, c.alias, v).Set(1)
-			case Float:
+			case metrics.Float:
 				val, err := strconv.ParseFloat(v, 64)
 				if err != nil {
 					logger.Println(err)
 					continue
 				}
 				c.metrics[k].WithLabelValues(c.addr, c.alias).Set(val)
-			case Bool:
+			case metrics.Bool:
 				val, err := strconv.ParseBool(v)
 				if err != nil {
 					logger.Println(err)
