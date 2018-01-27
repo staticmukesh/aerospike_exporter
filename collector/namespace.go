@@ -2,6 +2,7 @@ package collector
 
 import (
 	"errors"
+	"fmt"
 	"strconv"
 	"strings"
 	"time"
@@ -16,7 +17,6 @@ type namespaceCollector struct {
 }
 
 func (n *namespaceCollector) Collect(ch chan<- prometheus.Metric) {
-	logger.Println("Collecting metrics")
 	namespaces, err := n.getNamespaces()
 	if err != nil {
 		return
@@ -29,16 +29,36 @@ func (n *namespaceCollector) Collect(ch chan<- prometheus.Metric) {
 		}
 
 		n.process(namespace, scraps)
+	}
 
-		for _, metric := range n.c.metrics {
-			metric.Collect(ch)
-		}
+	for _, metric := range n.c.metrics {
+		metric.Collect(ch)
 	}
 }
 
 func (n *namespaceCollector) Describe(ch chan<- *prometheus.Desc) {
-	logger.Println("Describing metrics", len(n.c.metrics))
 	n.c.Describe(ch)
+}
+
+func (n *namespaceCollector) extract(namespace string) (Scraps, error) {
+	conn, err := aerospike.NewConnection(n.c.addr, 10*time.Second)
+	if err != nil {
+		logger.Println("Aerospike error:", err)
+		return nil, err
+	}
+	defer conn.Close()
+
+	data, err := aerospike.RequestInfo(conn, "namespace/"+namespace)
+	if err != nil {
+		logger.Println("Aerospike error:", err)
+		return nil, err
+	}
+
+	if unparsed, ok := data["namespace/"+namespace]; ok {
+		return n.c.parse(unparsed), nil
+	}
+
+	return Scraps{}, fmt.Errorf("No data exists for namespace %v", namespace)
 }
 
 func (n *namespaceCollector) getNamespaces() ([]string, error) {
@@ -61,25 +81,6 @@ func (n *namespaceCollector) getNamespaces() ([]string, error) {
 	}
 
 	return strings.Split(namespacesStr, ";"), nil
-}
-
-func (n *namespaceCollector) extract(namespace string) (Scraps, error) {
-	conn, err := aerospike.NewConnection(n.c.addr, 10*time.Second)
-	if err != nil {
-		logger.Println("Aerospike error:", err)
-		return nil, err
-	}
-	defer conn.Close()
-
-	data, err := aerospike.RequestInfo(conn, "namespace/"+namespace)
-	if err != nil {
-		logger.Println("Aerospike error:", err)
-		return nil, err
-	}
-
-	logger.Println(data)
-
-	return data, nil
 }
 
 func (n *namespaceCollector) process(namespace string, scraps Scraps) {

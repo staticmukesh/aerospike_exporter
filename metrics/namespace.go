@@ -84,7 +84,7 @@ var (
 		},
 
 		"stop_writes": Info{
-			Type:      Float,
+			Type:      Bool,
 			Name:      "stop_writes",
 			Help:      "Number of stop writes",
 			Labels:    []string{"addr", "alias", "namespace"},
@@ -92,7 +92,7 @@ var (
 		},
 
 		"hwm_breached": Info{
-			Type:      Float,
+			Type:      Bool,
 			Name:      "hwm_breached",
 			Help:      "Number of hwm breached",
 			Labels:    []string{"addr", "alias", "namespace"},
@@ -1117,7 +1117,7 @@ var (
 
 		"replication-factor": Info{
 			Type:      Float,
-			Name:      "replication-factor",
+			Name:      "replication_factor",
 			Help:      "Number of replication-factor",
 			Labels:    []string{"addr", "alias", "namespace"},
 			Subsystem: "ns",
@@ -1125,7 +1125,7 @@ var (
 
 		"memory-size": Info{
 			Type:      Float,
-			Name:      "memory-size",
+			Name:      "memory_size",
 			Help:      "memory-size",
 			Labels:    []string{"addr", "alias", "namespace"},
 			Subsystem: "ns",
@@ -1133,7 +1133,7 @@ var (
 
 		"default-ttl": Info{
 			Type:      Float,
-			Name:      "default-ttl",
+			Name:      "default_ttl",
 			Help:      "default-ttl",
 			Labels:    []string{"addr", "alias", "namespace"},
 			Subsystem: "ns",
@@ -1141,7 +1141,7 @@ var (
 
 		"enable-xdr": Info{
 			Type:      Bool,
-			Name:      "enable-xdr",
+			Name:      "enable_xdr",
 			Help:      "Number of enable-xdr",
 			Labels:    []string{"addr", "alias", "namespace"},
 			Subsystem: "ns",
@@ -1149,7 +1149,7 @@ var (
 
 		"sets-enable-xdr": Info{
 			Type:      Bool,
-			Name:      "sets-enable-xdr",
+			Name:      "sets_enable_xdr",
 			Help:      "sets-enable-xdr",
 			Labels:    []string{"addr", "alias", "namespace"},
 			Subsystem: "ns",
@@ -1157,7 +1157,7 @@ var (
 
 		"ns-forward-xdr-writes": Info{
 			Type:      Bool,
-			Name:      "ns-forward-xdr-writes",
+			Name:      "ns_forward_xdr_writes",
 			Help:      "ns-forward-xdr-writes",
 			Labels:    []string{"addr", "alias", "namespace"},
 			Subsystem: "ns",
@@ -1165,7 +1165,7 @@ var (
 
 		"allow-nonxdr-writes": Info{
 			Type:      Bool,
-			Name:      "allow-nonxdr-writes",
+			Name:      "allow_nonxdr_writes",
 			Help:      "allow-nonxdr-writes",
 			Labels:    []string{"addr", "alias", "namespace"},
 			Subsystem: "ns",
@@ -1173,7 +1173,7 @@ var (
 
 		"allow-xdr-writes": Info{
 			Type:      Bool,
-			Name:      "allow-xdr-writes",
+			Name:      "allow_xdr_writes",
 			Help:      "allow-xdr-writes",
 			Labels:    []string{"addr", "alias", "namespace"},
 			Subsystem: "ns",
@@ -1181,7 +1181,7 @@ var (
 
 		"cold-start-evict-ttl": Info{
 			Type:      Float,
-			Name:      "cold-start-evict-ttl",
+			Name:      "cold_start_evict_ttl",
 			Help:      "cold-start-evict-ttl",
 			Labels:    []string{"addr", "alias", "namespace"},
 			Subsystem: "ns",
@@ -1189,7 +1189,7 @@ var (
 
 		"conflict-resolution-policy": Info{
 			Type:      String,
-			Name:      "conflict-resolution-policy",
+			Name:      "conflict_resolution_policy",
 			Help:      "conflict-resolution-policy",
 			Labels:    []string{"addr", "alias", "policy", "namespace"},
 			Subsystem: "ns",
@@ -1197,7 +1197,7 @@ var (
 
 		"data-in-index": Info{
 			Type:      Bool,
-			Name:      "data-in-index",
+			Name:      "data_in_index",
 			Help:      "data-in-index",
 			Labels:    []string{"addr", "alias", "namespace"},
 			Subsystem: "ns",
@@ -1205,7 +1205,7 @@ var (
 
 		"disable-write-dup-res": Info{
 			Type:      Bool,
-			Name:      "disable-write-dup-res",
+			Name:      "disable_write_dup_res",
 			Help:      "disable-write-dup-res",
 			Labels:    []string{"addr", "alias", "namespace"},
 			Subsystem: "ns",
@@ -1213,7 +1213,7 @@ var (
 
 		"disallow-null-setname": Info{
 			Type:      Bool,
-			Name:      "disallow-null-setname",
+			Name:      "disallow_null_setname",
 			Help:      "disallow-null-setname",
 			Labels:    []string{"addr", "alias", "namespace"},
 			Subsystem: "ns",
@@ -1221,7 +1221,7 @@ var (
 
 		"enable-benchmarks-batch-sub": Info{
 			Type:      Bool,
-			Name:      "enable-benchmarks-batch-sub",
+			Name:      "enable_benchmarks_batch_sub",
 			Help:      "enable-benchmarks-batch-sub",
 			Labels:    []string{"addr", "alias", "namespace"},
 			Subsystem: "ns",
@@ -1229,7 +1229,7 @@ var (
 
 		"enable-benchmarks-read": Info{
 			Type:      Bool,
-			Name:      "enable-benchmarks-read",
+			Name:      "enable_benchmarks_read",
 			Help:      "enable-benchmarks-read",
 			Labels:    []string{"addr", "alias", "namespace"},
 			Subsystem: "ns",
@@ -1237,7 +1237,7 @@ var (
 
 		"enable-benchmarks-udf": Info{
 			Type:      Bool,
-			Name:      "enable-benchmarks-udf",
+			Name:      "enable_benchmarks_udf",
 			Help:      "enable-benchmarks-udf",
 			Labels:    []string{"addr", "alias", "namespace"},
 			Subsystem: "ns",
@@ -1245,7 +1245,7 @@ var (
 
 		"enable-benchmarks-udf-sub": Info{
 			Type:      Bool,
-			Name:      "enable-benchmarks-udf-sub",
+			Name:      "enable_benchmarks_udf_sub",
 			Help:      "enable-benchmarks-udf-sub",
 			Labels:    []string{"addr", "alias", "namespace"},
 			Subsystem: "ns",
@@ -1253,7 +1253,7 @@ var (
 
 		"enable-benchmarks-write": Info{
 			Type:      Bool,
-			Name:      "enable-benchmarks-write",
+			Name:      "enable_benchmarks_write",
 			Help:      "enable-benchmarks-write",
 			Labels:    []string{"addr", "alias", "namespace"},
 			Subsystem: "ns",
@@ -1261,7 +1261,7 @@ var (
 
 		"enable-hist-proxy": Info{
 			Type:      Bool,
-			Name:      "enable-hist-proxy",
+			Name:      "enable_hist_proxy",
 			Help:      "enable-hist-proxy",
 			Labels:    []string{"addr", "alias", "namespace"},
 			Subsystem: "ns",
@@ -1269,7 +1269,7 @@ var (
 
 		"evict-hist-buckets": Info{
 			Type:      Float,
-			Name:      "evict-hist-buckets",
+			Name:      "evict_hist_buckets",
 			Help:      "evict-hist-buckets",
 			Labels:    []string{"addr", "alias", "namespace"},
 			Subsystem: "ns",
@@ -1277,7 +1277,7 @@ var (
 
 		"evict-tenths-pct": Info{
 			Type:      Float,
-			Name:      "evict-tenths-pct",
+			Name:      "evict_tenths_pct",
 			Help:      "evict-tenths-pct",
 			Labels:    []string{"addr", "alias", "namespace"},
 			Subsystem: "ns",
@@ -1285,7 +1285,7 @@ var (
 
 		"high-water-disk-pct": Info{
 			Type:      Float,
-			Name:      "high-water-disk-pct",
+			Name:      "high_water_disk_pct",
 			Help:      "high-water-disk-pct",
 			Labels:    []string{"addr", "alias", "namespace"},
 			Subsystem: "ns",
@@ -1293,7 +1293,7 @@ var (
 
 		"high-water-memory-pct": Info{
 			Type:      Float,
-			Name:      "high-water-memory-pct",
+			Name:      "high_water_memory_pct",
 			Help:      "high-water-memory-pct",
 			Labels:    []string{"addr", "alias", "namespace"},
 			Subsystem: "ns",
@@ -1301,7 +1301,7 @@ var (
 
 		"max-ttl": Info{
 			Type:      Float,
-			Name:      "max-ttl",
+			Name:      "max_ttl",
 			Help:      "max-ttl",
 			Labels:    []string{"addr", "alias", "namespace"},
 			Subsystem: "ns",
@@ -1309,7 +1309,7 @@ var (
 
 		"migrate-order": Info{
 			Type:      Float,
-			Name:      "migrate-order",
+			Name:      "migrate_order",
 			Help:      "migrate-order",
 			Labels:    []string{"addr", "alias", "namespace"},
 			Subsystem: "ns",
@@ -1317,7 +1317,7 @@ var (
 
 		"migrate-retransmit-ms": Info{
 			Type:      Float,
-			Name:      "migrate-retransmit-ms",
+			Name:      "migrate_retransmit_ms",
 			Help:      "migrate-retransmit-ms",
 			Labels:    []string{"addr", "alias", "namespace"},
 			Subsystem: "ns",
@@ -1325,7 +1325,7 @@ var (
 
 		"migrate-sleep": Info{
 			Type:      Float,
-			Name:      "migrate-sleep",
+			Name:      "migrate_sleep",
 			Help:      "migrate-sleep",
 			Labels:    []string{"addr", "alias", "namespace"},
 			Subsystem: "ns",
@@ -1333,7 +1333,7 @@ var (
 
 		"obj-size-hist-max": Info{
 			Type:      Float,
-			Name:      "obj-size-hist-max",
+			Name:      "obj_size_hist_max",
 			Help:      "obj-size-hist-max",
 			Labels:    []string{"addr", "alias", "namespace"},
 			Subsystem: "ns",
@@ -1341,7 +1341,7 @@ var (
 
 		"partition-tree-locks": Info{
 			Type:      Float,
-			Name:      "partition-tree-locks",
+			Name:      "partition_tree_locks",
 			Help:      "partition-tree-locks",
 			Labels:    []string{"addr", "alias", "namespace"},
 			Subsystem: "ns",
@@ -1349,7 +1349,7 @@ var (
 
 		"partition-tree-sprigs": Info{
 			Type:      Float,
-			Name:      "partition-tree-sprigs",
+			Name:      "partition_tree_sprigs",
 			Help:      "partition-tree-sprigs",
 			Labels:    []string{"addr", "alias", "namespace"},
 			Subsystem: "ns",
@@ -1357,15 +1357,15 @@ var (
 
 		"rack-id": Info{
 			Type:      Float,
-			Name:      "rack-id",
+			Name:      "rack_id",
 			Help:      "rack-id",
 			Labels:    []string{"addr", "alias", "namespace"},
 			Subsystem: "ns",
 		},
 
 		"single-bin": Info{
-			Type:      Float,
-			Name:      "single-bin",
+			Type:      Bool,
+			Name:      "single_bin",
 			Help:      "single-bin",
 			Labels:    []string{"addr", "alias", "namespace"},
 			Subsystem: "ns",
@@ -1373,7 +1373,7 @@ var (
 
 		"stop-writes-pct": Info{
 			Type:      Float,
-			Name:      "stop-writes-pct",
+			Name:      "stop_writes_pct",
 			Help:      "stop-writes-pct",
 			Labels:    []string{"addr", "alias", "namespace"},
 			Subsystem: "ns",
@@ -1381,7 +1381,7 @@ var (
 
 		"tomb-raider-eligible-age": Info{
 			Type:      Float,
-			Name:      "tomb-raider-eligible-age",
+			Name:      "tomb_raider_eligible_age",
 			Help:      "tomb-raider-eligible-age",
 			Labels:    []string{"addr", "alias", "namespace"},
 			Subsystem: "ns",
@@ -1389,23 +1389,23 @@ var (
 
 		"tomb-raider-period": Info{
 			Type:      Float,
-			Name:      "tomb-raider-period",
+			Name:      "tomb_raider_period",
 			Help:      "tomb-raider-period",
 			Labels:    []string{"addr", "alias", "namespace"},
 			Subsystem: "ns",
 		},
 
 		"write-commit-level-override": Info{
-			Type:      Float,
-			Name:      "write-commit-level-override",
+			Type:      String,
+			Name:      "write_commit_level_override",
 			Help:      "write-commit-level-override",
-			Labels:    []string{"addr", "alias", "namespace"},
+			Labels:    []string{"addr", "alias", "override", "namespace"},
 			Subsystem: "ns",
 		},
 
 		"storage-engine": Info{
 			Type:      String,
-			Name:      "storage-engine",
+			Name:      "storage_engine",
 			Help:      "storage-engine",
 			Labels:    []string{"addr", "alias", "engine", "namespace"},
 			Subsystem: "ns",
@@ -1413,7 +1413,7 @@ var (
 
 		"storage-engine.file": Info{
 			Type:      String,
-			Name:      "storage-engine.file",
+			Name:      "storage_engine_file",
 			Help:      "storage-engine.file",
 			Labels:    []string{"addr", "alias", "path", "namespace"},
 			Subsystem: "ns",
@@ -1421,7 +1421,7 @@ var (
 
 		"storage-engine.filesize": Info{
 			Type:      Float,
-			Name:      "storage-engine.filesize",
+			Name:      "storage_engine_filesize",
 			Help:      "storage-engine.filesize",
 			Labels:    []string{"addr", "alias", "namespace"},
 			Subsystem: "ns",
@@ -1429,7 +1429,7 @@ var (
 
 		"storage-engine.write-block-size": Info{
 			Type:      Float,
-			Name:      "storage-engine.write-block-size",
+			Name:      "storage_engine_write_block_size",
 			Help:      "storage-engine.write-block-size",
 			Labels:    []string{"addr", "alias", "namespace"},
 			Subsystem: "ns",
@@ -1437,7 +1437,7 @@ var (
 
 		"storage-engine.data-in-memory": Info{
 			Type:      Bool,
-			Name:      "storage-engine.data-in-memory",
+			Name:      "storage_engine_data_in_memory",
 			Help:      "storage-engine.data-in-memory",
 			Labels:    []string{"addr", "alias", "namespace"},
 			Subsystem: "ns",
@@ -1445,7 +1445,7 @@ var (
 
 		"storage-engine.cold-start-empty": Info{
 			Type:      Bool,
-			Name:      "storage-engine.cold-start-empty",
+			Name:      "storage_engine_cold_start_empty",
 			Help:      "storage-engine.cold-start-empty",
 			Labels:    []string{"addr", "alias", "namespace"},
 			Subsystem: "ns",
@@ -1453,7 +1453,7 @@ var (
 
 		"storage-engine.defrag-lwm-pct": Info{
 			Type:      Float,
-			Name:      "storage-engine.defrag-lwm-pct",
+			Name:      "storage_engine_defrag_lwm_pct",
 			Help:      "storage-engine.defrag-lwm-pct",
 			Labels:    []string{"addr", "alias", "namespace"},
 			Subsystem: "ns",
@@ -1461,7 +1461,7 @@ var (
 
 		"storage-engine.defrag-queue-min": Info{
 			Type:      Float,
-			Name:      "storage-engine.defrag-queue-min",
+			Name:      "storage_engine_defrag_queue_min",
 			Help:      "storage-engine.defrag-queue-min",
 			Labels:    []string{"addr", "alias", "namespace"},
 			Subsystem: "ns",
@@ -1469,7 +1469,7 @@ var (
 
 		"storage-engine.defrag-sleep": Info{
 			Type:      Float,
-			Name:      "storage-engine.defrag-sleep",
+			Name:      "storage_engine_defrag_sleep",
 			Help:      "storage-engine.defrag-sleep",
 			Labels:    []string{"addr", "alias", "namespace"},
 			Subsystem: "ns",
@@ -1477,7 +1477,7 @@ var (
 
 		"storage-engine.defrag-startup-minimum": Info{
 			Type:      Float,
-			Name:      "storage-engine.defrag-startup-minimum",
+			Name:      "storage_engine_defrag_startup_minimum",
 			Help:      "storage-engine.defrag-startup-minimum",
 			Labels:    []string{"addr", "alias", "namespace"},
 			Subsystem: "ns",
@@ -1485,7 +1485,7 @@ var (
 
 		"storage-engine.disable-odirect": Info{
 			Type:      Bool,
-			Name:      "storage-engine.disable-odirect",
+			Name:      "storage_engine_disable_odirect",
 			Help:      "storage-engine.disable-odirect",
 			Labels:    []string{"addr", "alias", "namespace"},
 			Subsystem: "ns",
@@ -1493,7 +1493,7 @@ var (
 
 		"storage-engine.enable-benchmarks-storage": Info{
 			Type:      Bool,
-			Name:      "storage-engine.enable-benchmarks-storage",
+			Name:      "storage_engine_enable_benchmarks_storage",
 			Help:      "storage-engine.enable-benchmarks-storage",
 			Labels:    []string{"addr", "alias", "namespace"},
 			Subsystem: "ns",
@@ -1501,7 +1501,7 @@ var (
 
 		"storage-engine.enable-osync": Info{
 			Type:      Bool,
-			Name:      "storage-engine.enable-osync",
+			Name:      "storage_engine_enable_osync",
 			Help:      "storage-engine.enable-osync",
 			Labels:    []string{"addr", "alias", "namespace"},
 			Subsystem: "ns",
@@ -1509,7 +1509,7 @@ var (
 
 		"storage-engine.flush-max-ms": Info{
 			Type:      Float,
-			Name:      "storage-engine.flush-max-ms",
+			Name:      "storage_engine_flush_max_ms",
 			Help:      "storage-engine.flush-max-ms",
 			Labels:    []string{"addr", "alias", "namespace"},
 			Subsystem: "ns",
@@ -1517,7 +1517,7 @@ var (
 
 		"storage-engine.fsync-max-sec": Info{
 			Type:      Float,
-			Name:      "storage-engine.fsync-max-sec",
+			Name:      "storage_engine_fsync_max_sec",
 			Help:      "storage-engine.fsync-max-sec",
 			Labels:    []string{"addr", "alias", "namespace"},
 			Subsystem: "ns",
@@ -1525,7 +1525,7 @@ var (
 
 		"storage-engine.max-write-cache": Info{
 			Type:      Float,
-			Name:      "storage-engine.max-write-cache",
+			Name:      "storage_engine_max_write_cache",
 			Help:      "storage-engine.max-write-cache",
 			Labels:    []string{"addr", "alias", "namespace"},
 			Subsystem: "ns",
@@ -1533,7 +1533,7 @@ var (
 
 		"storage-engine.min-avail-pct": Info{
 			Type:      Float,
-			Name:      "storage-engine.min-avail-pct",
+			Name:      "storage_engine_min_avail_pct",
 			Help:      "storage-engine.min-avail-pct",
 			Labels:    []string{"addr", "alias", "namespace"},
 			Subsystem: "ns",
@@ -1541,7 +1541,7 @@ var (
 
 		"storage-engine.post-write-queue": Info{
 			Type:      Float,
-			Name:      "storage-engine.post-write-queue",
+			Name:      "storage_engine_post_write_queue",
 			Help:      "storage-engine.post-write-queue",
 			Labels:    []string{"addr", "alias", "namespace"},
 			Subsystem: "ns",
@@ -1549,7 +1549,7 @@ var (
 
 		"storage-engine.tomb-raider-sleep": Info{
 			Type:      Float,
-			Name:      "storage-engine.tomb-raider-sleep",
+			Name:      "storage_engine_tomb_raider_sleep",
 			Help:      "storage-engine.tomb-raider-sleep",
 			Labels:    []string{"addr", "alias", "namespace"},
 			Subsystem: "ns",
@@ -1557,7 +1557,7 @@ var (
 
 		"storage-engine.write-threads": Info{
 			Type:      Float,
-			Name:      "storage-engine.write-threads",
+			Name:      "storage_engine_write_threads",
 			Help:      "storage-engine.write-threads",
 			Labels:    []string{"addr", "alias", "namespace"},
 			Subsystem: "ns",
@@ -1565,7 +1565,7 @@ var (
 
 		"sindex.num-partitions": Info{
 			Type:      Float,
-			Name:      "sindex.num-partitions",
+			Name:      "sindex_num_partitions",
 			Help:      "sindex.num-partitions",
 			Labels:    []string{"addr", "alias", "namespace"},
 			Subsystem: "ns",
@@ -1573,7 +1573,7 @@ var (
 
 		"geo2dsphere-within.strict": Info{
 			Type:      Bool,
-			Name:      "geo2dsphere-within.strict",
+			Name:      "geo2dsphere_within_strict",
 			Help:      "geo2dsphere-within.strict",
 			Labels:    []string{"addr", "alias", "namespace"},
 			Subsystem: "ns",
@@ -1581,7 +1581,7 @@ var (
 
 		"geo2dsphere-within.min-level": Info{
 			Type:      Float,
-			Name:      "geo2dsphere-within.min-level",
+			Name:      "geo2dsphere_within_min_level",
 			Help:      "geo2dsphere-within.min-level",
 			Labels:    []string{"addr", "alias", "namespace"},
 			Subsystem: "ns",
@@ -1589,7 +1589,7 @@ var (
 
 		"geo2dsphere-within.max-level": Info{
 			Type:      Float,
-			Name:      "geo2dsphere-within.max-level",
+			Name:      "geo2dsphere_within_max_level",
 			Help:      "geo2dsphere-within.max-level",
 			Labels:    []string{"addr", "alias", "namespace"},
 			Subsystem: "ns",
@@ -1597,7 +1597,7 @@ var (
 
 		"geo2dsphere-within.max-cells": Info{
 			Type:      Float,
-			Name:      "geo2dsphere-within.max-cells",
+			Name:      "geo2dsphere_within_max_cells",
 			Help:      "geo2dsphere-within.max-cells",
 			Labels:    []string{"addr", "alias", "namespace"},
 			Subsystem: "ns",
@@ -1605,7 +1605,7 @@ var (
 
 		"geo2dsphere-within.level-mod": Info{
 			Type:      Float,
-			Name:      "geo2dsphere-within.level-mod",
+			Name:      "geo2dsphere_within_level_mod",
 			Help:      "geo2dsphere-within.level-mod",
 			Labels:    []string{"addr", "alias", "namespace"},
 			Subsystem: "ns",
@@ -1613,7 +1613,7 @@ var (
 
 		"geo2dsphere-within.earth-radius-meters": Info{
 			Type:      Float,
-			Name:      "geo2dsphere-within.earth-radius-meters",
+			Name:      "geo2dsphere_within_earth_radius_meters",
 			Help:      "geo2dsphere-within.earth-radius-meters",
 			Labels:    []string{"addr", "alias", "namespace"},
 			Subsystem: "ns",
