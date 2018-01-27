@@ -1191,7 +1191,7 @@ var (
 			Type:      String,
 			Name:      "conflict-resolution-policy",
 			Help:      "conflict-resolution-policy",
-			Labels:    []string{"addr", "alias", "namespace"},
+			Labels:    []string{"addr", "alias", "policy", "namespace"},
 			Subsystem: "ns",
 		},
 
@@ -1363,14 +1363,6 @@ var (
 			Subsystem: "ns",
 		},
 
-		"read-consistency-level-override": Info{
-			Type:      String,
-			Name:      "read-consistency-level-override",
-			Help:      "read-consistency-level-override",
-			Labels:    []string{"addr", "alias", "namespace"},
-			Subsystem: "ns",
-		},
-
 		"single-bin": Info{
 			Type:      Float,
 			Name:      "single-bin",
@@ -1415,7 +1407,7 @@ var (
 			Type:      String,
 			Name:      "storage-engine",
 			Help:      "storage-engine",
-			Labels:    []string{"addr", "alias", "namespace"},
+			Labels:    []string{"addr", "alias", "engine", "namespace"},
 			Subsystem: "ns",
 		},
 
@@ -1423,7 +1415,7 @@ var (
 			Type:      String,
 			Name:      "storage-engine.file",
 			Help:      "storage-engine.file",
-			Labels:    []string{"addr", "alias", "namespace"},
+			Labels:    []string{"addr", "alias", "path", "namespace"},
 			Subsystem: "ns",
 		},
 

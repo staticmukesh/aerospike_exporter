@@ -10,9 +10,8 @@ import (
 	"time"
 
 	"github.com/aerospike/aerospike-client-go"
-	"github.com/staticmukesh/aerospike_exporter/metrics"
-
 	"github.com/prometheus/client_golang/prometheus"
+	"github.com/staticmukesh/aerospike_exporter/metrics"
 )
 
 var (
@@ -61,6 +60,16 @@ func NewCollector(options Options, field string) (Collector, error) {
 				metrics: metrics,
 			},
 		}, nil
+	case "namespaces":
+		return &namespaceCollector{
+			c: collector{
+				addr:    options.Addr,
+				alias:   options.Alias,
+				field:   field,
+				meta:    meta,
+				metrics: metrics,
+			},
+		}, nil
 	}
 
 	return &collector{}, errors.New("Collector doesn't exist")
@@ -98,14 +107,14 @@ func (c *collector) extract() (Scraps, error) {
 	conn, err := aerospike.NewConnection(c.addr, 10*time.Second)
 	if err != nil {
 		logger.Println("Aerospike error:", err)
-		return Scraps{}, err
+		return nil, err
 	}
 	defer conn.Close()
 
 	scraps, err := aerospike.RequestInfo(conn, c.field)
 	if err != nil {
 		logger.Println("Aerospike error:", err)
-		return Scraps{}, nil
+		return nil, err
 	}
 
 	if len(c.field) != 0 {
@@ -115,7 +124,7 @@ func (c *collector) extract() (Scraps, error) {
 		}
 	}
 
-	return scraps, err
+	return scraps, nil
 }
 
 func (c *collector) process(scraps Scraps) {
