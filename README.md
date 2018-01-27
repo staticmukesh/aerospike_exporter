@@ -51,6 +51,10 @@ The exporter collects metrics related to following items from `Aerospike`'s [Inf
 - [ ] Latency
 - [ ] Namespace
 
+You can import following [Grafana](https://github.com/grafana/grafana) dashboard present under `dashboards/` in project folder for Aerospike Metrics Exporter.
+
+![alt Grafana Dashboard](screenshot.png "Grafana Dashboard for Aerospike Metrics Exporter")
+
 ### Local building and running
 
 If you want to build package yourself, or want to contribute. You can follow the guide to setup the project.
