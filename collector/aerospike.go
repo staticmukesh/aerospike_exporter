@@ -25,7 +25,12 @@ func (a *Aerospike) Describe(ch chan<- *prometheus.Desc) {
 
 // NewAerospike initializes collectors and return it
 func NewAerospike(options Options) (*Aerospike, error) {
-	basicCollector, err := NewCollector(options, "statistics")
+	basicCollector, err := NewCollector(options, "")
+	if err != nil {
+		return nil, err
+	}
+
+	statsCollector, err := NewCollector(options, "statistics")
 	if err != nil {
 		return nil, err
 	}
@@ -33,6 +38,7 @@ func NewAerospike(options Options) (*Aerospike, error) {
 	return &Aerospike{
 		collectors: []Collector{
 			basicCollector,
+			statsCollector,
 		},
 	}, nil
 }
