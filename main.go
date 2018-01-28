@@ -7,14 +7,16 @@ import (
 	"os"
 
 	"github.com/prometheus/client_golang/prometheus"
+	"github.com/prometheus/client_golang/prometheus/promhttp"
 	"github.com/staticmukesh/aerospike_exporter/collector"
 )
 
 var (
-	asAddr     = flag.String("aerospike.addr", GetEnv("AEROSPIKE_ADDR", "localhost:3000"), "Address of aerospike node")
-	asAlias    = flag.String("aerospike.alias", GetEnv("AEROSPIKE_ALIAS", ""), "Alias of aerospike node")
-	listenAddr = flag.String("web.listen-address", "0.0.0.0:9145", "Address to listen on for web interface and telemetry.")
-	metricPath = flag.String("web.telemetry-path", "/metrics", "Path under which to expose metrics.")
+	asAddr        = flag.String("aerospike.addr", GetEnv("AEROSPIKE_ADDR", "localhost:3000"), "Address of aerospike node")
+	asAlias       = flag.String("aerospike.alias", GetEnv("AEROSPIKE_ALIAS", ""), "Alias of aerospike node")
+	listenAddr    = flag.String("web.listen-address", "0.0.0.0:9145", "Address to listen on for web interface and telemetry.")
+	metricPath    = flag.String("web.telemetry-path", "/metrics", "Path under which to expose metrics.")
+	asMetricsOnly = flag.Bool("as-only-metrics", false, "Whether to avoid metrics other than aerospike.")
 
 	version = "<<<auto-filled by ldflags>>>"
 	build   = "<<<auto-filled by ldflags>>>"
@@ -45,7 +47,16 @@ func main() {
 	logger.Println("Connecting to Aerospike Node:", *asAddr)
 	logger.Println("Using node alias: ", *asAlias)
 
-	prometheus.Register(collector)
+	// GET /metrics
+	if *asMetricsOnly {
+		registry := prometheus.NewRegistry()
+		registry.Register(collector)
+		handler := promhttp.HandlerFor(registry, promhttp.HandlerOpts{})
+		http.Handle(*metricPath, handler)
+	} else {
+		prometheus.MustRegister(collector)
+		http.Handle(*metricPath, prometheus.Handler())
+	}
 
 	// GET /
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
@@ -61,9 +72,6 @@ func main() {
 			</html>
 		`))
 	})
-
-	// GET /metrics
-	http.Handle(*metricPath, prometheus.Handler())
 
 	logger.Printf("Providing metrics at %s%s", *listenAddr, *metricPath)
 	logger.Fatal(http.ListenAndServe(*listenAddr, nil))

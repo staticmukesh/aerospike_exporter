@@ -22,12 +22,14 @@ func (n *namespaceCollector) Collect(ch chan<- prometheus.Metric) {
 		return
 	}
 
+	// Update number of namespaces
+	n.c.metrics["ns_count"].WithLabelValues(n.c.addr, n.c.alias).Set(float64(len(namespaces)))
+
 	for _, namespace := range namespaces {
 		scraps, err := n.extract(namespace)
 		if err != nil {
 			return
 		}
-
 		n.process(namespace, scraps)
 	}
 

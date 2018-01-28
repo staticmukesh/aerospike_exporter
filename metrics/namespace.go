@@ -3,6 +3,14 @@ package metrics
 var (
 	// namespaceInfo stores aerospike namespace field to metric meta mapping
 	namespaceInfo = map[string]Info{
+		"ns_count": Info{
+			Type:      Float,
+			Name:      "count",
+			Help:      "Number of namespaces",
+			Labels:    []string{"addr", "alias"},
+			Subsystem: "ns",
+		},
+
 		"ns_cluster_size": Info{
 			Type:      Float,
 			Name:      "ns_cluster_size",

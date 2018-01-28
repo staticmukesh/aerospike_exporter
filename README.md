@@ -32,6 +32,7 @@ aerospike.addr     | Address of aerospike node, defaults to `localhost:3000`.
 aerospike.alias    | Alias for aerospike node address.
 web.listen-address | Address to listen on for web interface and telemetry, defaults to `0.0.0.0:9145`.
 web.telemetry-path | Path under which to expose metrics, defaults to `metrics`.
+as-only-metrics    | Whether to avoid metrics other than aerospike, defaults to `false`.
 
 These settings take precedence over any configurations provided by [environment variables](#environment-variables).
 
