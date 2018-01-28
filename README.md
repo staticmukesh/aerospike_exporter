@@ -53,7 +53,7 @@ The exporter collects metrics related to following items from `Aerospike`'s [Inf
 
 You can import following [Grafana](https://github.com/grafana/grafana) dashboard present under `dashboards/` in project folder for Aerospike Metrics Exporter.
 
-![alt Grafana Dashboard](screenshot.png "Grafana Dashboard for Aerospike Metrics Exporter")
+![alt Grafana Dashboard](screenshots/aerospike-overview.png "Grafana Dashboard for Aerospike Metrics Exporter")
 
 ### Local building and running
 
